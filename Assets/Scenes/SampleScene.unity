@@ -1074,8 +1074,10 @@ MonoBehaviour:
   s1: {fileID: 1725235839}
   s2: {fileID: 1798350026}
   s3: {fileID: 1372313636}
-  max: 100
-  sigma: 0
+  max1: 20
+  max2: 20
+  max3: 20
+  max: 10
 --- !u!4 &1946214312
 Transform:
   m_ObjectHideFlags: 0
