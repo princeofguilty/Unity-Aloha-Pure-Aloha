@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class DebugGUIExamples : MonoBehaviour
 {
     public List<station> stations = new List<station>();
+    private TextMeshPro efficiency;
+    private float calculateEfficiency;
     /* * * *
      * 
      *   [DebugGUIGraph]
@@ -37,7 +40,8 @@ public class DebugGUIExamples : MonoBehaviour
 
     void Awake()
     {
-        DebugGUI.SetGraphProperties("efficiency", "Effiecency", 0, 1, 0, new Color(1, 1, 0), true);
+        efficiency=GetComponentInChildren<TextMeshPro>();
+        DebugGUI.SetGraphProperties("efficiency", "efficiency", 0, 1, 0, new Color(1, 1, 0), true);
         Invoke("update_graph", 1);
     }
 
@@ -58,9 +62,13 @@ public class DebugGUIExamples : MonoBehaviour
             success_S_ += x.success_S_;
             failure_S_ += x.failure_S_;
         }
-        
+
+        calculateEfficiency = success_S_ / (success_S_ + failure_S_);
+
+        efficiency.text = "efficiency: " + Mathf.Round(calculateEfficiency * 100) + '%';
+
         if (success_S_ + failure_S_ != 0)
-            DebugGUI.Graph("efficiency", success_S_ / (success_S_ + failure_S_));
+            DebugGUI.Graph("efficiency", calculateEfficiency);
         Invoke("update_graph", 1);
     }
 
